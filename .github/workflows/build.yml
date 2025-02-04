@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest] # Operating systems to test
-        node-version: [14, 16, 18, 20, 22]                      # Node.js versions to test
+        node-version: [18, 20, 22]                      # Node.js versions to test
         attempt: [1, 2, 3, 4, 5]                        # Repeat tests 5 times
 
     steps:
@@ -28,10 +28,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies using pnpm
+        run: pnpm install
 
       - name: Testing on OS (${{ matrix.os }}) with Node.js (version ${{ matrix.node-version }}) attempt ${{ matrix.attempt }}
         run: |
           echo "Run attempt: ${{ matrix.attempt }}"
-          npm test
+          pnpm test
