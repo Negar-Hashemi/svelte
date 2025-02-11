@@ -32,7 +32,9 @@ jobs:
         run: npm install -g pnpm@9.4.0
           
       - name: Install dependencies using pnpm
-        run: pnpm install
+        run: |
+          pnpm install
+          pnpm exec playwright install
 
       - name: Testing on OS (${{ matrix.os }}) with Node.js (version ${{ matrix.node-version }}) attempt ${{ matrix.attempt }}
         run: |
