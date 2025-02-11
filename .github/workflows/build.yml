@@ -29,11 +29,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
-      - name: Install pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@9 --activate
-          pnpm -v
+      - name: Install pnpm@9 explicitly
+        run: npm install -g pnpm@9
+        shell: bash
+
+      - name: Verify pnpm installation
+        run: pnpm -v
+        shell: bash
 
       - name: Install dependencies using pnpm
         run: pnpm install
