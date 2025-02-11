@@ -31,7 +31,6 @@ jobs:
       - name: Install pnpm
         run: |
           npx pnpm@9 install
-          pnpm -v
 
       - name: Install dependencies using pnpm
         run: pnpm install
