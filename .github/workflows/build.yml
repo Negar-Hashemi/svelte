@@ -30,8 +30,7 @@ jobs:
 
       - name: Install pnpm
         run: |
-          corepack enable
-          corepack prepare pnpm@9 --activate
+          npx pnpm@9 install
           pnpm -v
 
       - name: Install dependencies using pnpm
