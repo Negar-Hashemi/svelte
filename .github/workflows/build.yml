@@ -39,4 +39,4 @@ jobs:
 
       - name: Run tests (Attempt ${{ matrix.attempt }}) on OS ${{ matrix.os }}, Node.js ${{ matrix.node-version }}, Browser ${{ matrix.browser }}
         run: |
-          npx playwright test --project=${{ matrix.browser }}
+           BROWSER=${{ matrix.browser }} npx playwright test
