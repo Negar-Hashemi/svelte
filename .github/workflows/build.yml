@@ -38,5 +38,7 @@ jobs:
           pnpm exec playwright install --with-deps
 
       - name: Run tests (Attempt ${{ matrix.attempt }}) on OS ${{ matrix.os }}, Node.js ${{ matrix.node-version }}, Browser ${{ matrix.browser }}
+        shell: bash
         run: |
-           BROWSER=${{ matrix.browser }} pnpm test
+          echo "Running tests for ${{ matrix.browser }} on ${{ matrix.os }}"
+          BROWSER=${{ matrix.browser }} pnpm test
