@@ -17,7 +17,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node-version: [18, 20, 22]
-        browser: [ChromeHeadless, FirefoxHeadless, Safari]
+        browser: [chromium, firefox, webkit]
         attempt: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     steps:
