@@ -1,4 +1,4 @@
-name: Test on Multiple OS
+name: Test on Multiple OS and Browsers
 
 on:
   push:
@@ -15,9 +15,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest] # Operating systems to test
-        node-version: [18, 20, 22]                      # Node.js versions to test
-        attempt: [1, 2, 3, 4, 5, 6, 7, 8, 9,10]         # Repeat tests 10 times
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [18, 20, 22]
+        browser: [ChromeHeadless, FirefoxHeadless, Safari]
+        attempt: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     steps:
       - name: Checkout code
@@ -34,9 +35,8 @@ jobs:
       - name: Install dependencies using pnpm
         run: |
           pnpm install
-          pnpm exec playwright install
+          pnpm exec playwright install --with-deps
 
-      - name: Testing on OS (${{ matrix.os }}) with Node.js (version ${{ matrix.node-version }}) attempt ${{ matrix.attempt }}
+      - name: Run tests (Attempt ${{ matrix.attempt }}) on OS ${{ matrix.os }}, Node.js ${{ matrix.node-version }}, Browser ${{ matrix.browser }}
         run: |
-          echo "Run attempt: ${{ matrix.attempt }}"
-          pnpm test
+          npx playwright test --project=${{ matrix.browser }}
